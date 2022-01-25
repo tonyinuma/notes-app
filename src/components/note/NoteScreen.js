@@ -1,7 +1,7 @@
-export const RegisterScreen = () => {
+export const NoteScreen = () => {
     return (
         <div>
-            RegisterScreen
+            NoteScreen
         </div>
     );
 };
