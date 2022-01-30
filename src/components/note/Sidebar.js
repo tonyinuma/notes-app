@@ -1,3 +1,5 @@
+import {NoteEntries} from "./NoteEntries";
+
 export const Sidebar = () => {
     return (
         <aside className="note__sidebar">
@@ -13,6 +15,8 @@ export const Sidebar = () => {
                 <i className="far fa-calendar-plus fa-5x"/>
                 <p className="mt-5">New Entry</p>
             </div>
+
+            <NoteEntries/>
 
         </aside>
     );
