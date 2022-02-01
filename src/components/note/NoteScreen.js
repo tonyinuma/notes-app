@@ -1,11 +1,12 @@
 import {Sidebar} from "./Sidebar";
+import {NothingSelected} from "./NothingSelected";
 
 export const NoteScreen = () => {
     return (
         <div className="note__main-content">
             <Sidebar/>
             <main>
-                <h1>Content</h1>
+                <NothingSelected/>
             </main>
         </div>
     );
