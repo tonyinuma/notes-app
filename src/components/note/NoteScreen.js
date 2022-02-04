@@ -1,4 +1,5 @@
 import {Sidebar} from "./Sidebar";
+import {SheetScreen} from "../sheets/SheetScreen";
 // import {NothingSelected} from "./NothingSelected";
 
 export const NoteScreen = () => {
@@ -7,6 +8,7 @@ export const NoteScreen = () => {
             <Sidebar/>
             <main>
                 {/*<NothingSelected/>*/}
+                <SheetScreen/>
             </main>
         </div>
     );
