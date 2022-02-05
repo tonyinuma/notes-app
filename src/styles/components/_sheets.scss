@@ -12,3 +12,38 @@
   justify-content: space-between;
   padding: 10px 20px 10px 20px;
 }
+
+.sheets__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+}
+
+.sheets__title_input, .sheets__textarea {
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.sheets__title_input {
+  color: $dark-gray;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.sheets__textarea {
+  border: none;
+  color: $dark-gray;
+  font-size: 20px;
+  flex: 1 1 auto;
+  resize: none;
+}
+
+.sheets__image img{
+  box-shadow: 5px 5px $dark-gray;
+  height: 150px;
+}
