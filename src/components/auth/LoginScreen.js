@@ -8,9 +8,14 @@ export const LoginScreen = () => {
         password: "admin123"
     });
 
+    const handleLogin = (e) => {
+        e.preventDefault();
+        console.log(formValues);
+    }
+
     return (<>
         <h3 className="auth__title">Login</h3>
-        <form>
+        <form onSubmit={handleLogin}>
             <input type="text" placeholder="Email" name="email"
                    className="auth__input" autoComplete="off"
                    value={formValues.email} onChange={handleInputChange}/>
