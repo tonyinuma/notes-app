@@ -1,12 +1,13 @@
 import {Link} from "react-router-dom";
 import {useForm} from "../../hooks/useForm";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {removeErrorAction, setErrorAction} from "../../actions/ui";
 import validator from "validator/es";
 
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
+    const {errorMessage} = useSelector(state => state.ui);
 
     const [registerValues, inputChange] = useForm({
         name: "Rick Sanchez",
@@ -23,8 +24,6 @@ export const RegisterScreen = () => {
         if (isFormValid()) {
             console.log("Registering user...");
         }
-
-        console.log(registerValues);
     }
 
     const isFormValid = () => {
@@ -47,9 +46,7 @@ export const RegisterScreen = () => {
         <h3 className="auth__title">Register</h3>
         <form onSubmit={handleRegister}>
 
-            <div className="auth__alert-error">
-                This is an error message
-            </div>
+            {errorMessage && <div className="auth__alert-error">{errorMessage}</div>}
 
             <input type="text" placeholder="Name" name="name" value={name}
                    onChange={inputChange} className="auth__input" autoComplete="off"/>
