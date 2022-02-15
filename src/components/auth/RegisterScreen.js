@@ -1,7 +1,12 @@
 import {Link} from "react-router-dom";
 import {useForm} from "../../hooks/useForm";
+import {useDispatch} from "react-redux";
+import {removeErrorAction, setErrorAction} from "../../actions/ui";
+import validator from "validator/es";
 
 export const RegisterScreen = () => {
+
+    const dispatch = useDispatch();
 
     const [registerValues, inputChange] = useForm({
         name: "Rick Sanchez",
@@ -14,12 +19,38 @@ export const RegisterScreen = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
+
+        if (isFormValid()) {
+            console.log("Registering user...");
+        }
+
         console.log(registerValues);
+    }
+
+    const isFormValid = () => {
+        if (name.trim().length === 0) {
+            dispatch(setErrorAction("Name is required"));
+            return false;
+        } else if (!validator.isEmail(email)) {
+            dispatch(setErrorAction("Email is invalid"));
+            return false;
+        } else if (password !== confirmPassword || password.trim().length < 5) {
+            dispatch(setErrorAction('Password should be at least 6 characters and match'));
+            return false;
+        }
+
+        dispatch(removeErrorAction());
+        return true;
     }
 
     return (<>
         <h3 className="auth__title">Register</h3>
         <form onSubmit={handleRegister}>
+
+            <div className="auth__alert-error">
+                This is an error message
+            </div>
+
             <input type="text" placeholder="Name" name="name" value={name}
                    onChange={inputChange} className="auth__input" autoComplete="off"/>
             <input type="text" placeholder="Email" name="email" value={email}
