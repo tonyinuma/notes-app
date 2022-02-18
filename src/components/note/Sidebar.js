@@ -7,7 +7,6 @@ export const Sidebar = () => {
     const dispatch = useDispatch()
 
     const handleLogout = () => {
-        console.log("dade");
         dispatch(startLogout())
     }
 
