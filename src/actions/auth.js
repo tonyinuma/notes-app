@@ -26,6 +26,7 @@ export const startLogin = (email, password) => {
 
 export const startRegister = (email, password, name) => {
     return (dispatch) => {
+        dispatch(startLoading())
         createUserWithEmailAndPassword(auth, email, password)
             .then(async ({user}) => {
 
@@ -33,6 +34,7 @@ export const startRegister = (email, password, name) => {
                     displayName: name
                 });
 
+                dispatch(finishLoading())
                 dispatch(login(user.uid, name));
 
             })

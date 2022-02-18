@@ -8,7 +8,7 @@ import {startRegister} from "../../actions/auth";
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
-    const {errorMessage} = useSelector(state => state.ui);
+    const {errorMessage, loading} = useSelector(state => state.ui);
 
     const [registerValues, inputChange] = useForm({
         name: "Rick Sanchez",
@@ -57,7 +57,7 @@ export const RegisterScreen = () => {
                    onChange={inputChange} className="auth__input"/>
             <input type="password" placeholder="Confirm password" name="confirmPassword" value={confirmPassword}
                    onChange={inputChange} className="auth__input"/>
-            <button type="submit" className="btn btn-primary btn-block mb-5">Register</button>
+            <button type="submit" className="btn btn-primary btn-block mb-5" disabled={loading}>Register</button>
 
             <Link to="/auth/login" className="link">
                 ¿Already registered?
