@@ -23,7 +23,7 @@
   border-radius: 2px;
 
   &:disabled {
-    background-color: lighten($primary, 1);
+    background-color: lighten($dark-gray, 1);
   }
 
   &:hover {

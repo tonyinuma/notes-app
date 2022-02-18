@@ -1,11 +1,13 @@
 import {Link} from "react-router-dom";
 import {useForm} from "../../hooks/useForm";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {startLogin, startLoginGoogle} from "../../actions/auth";
 
 export const LoginScreen = () => {
 
     const dispatch = useDispatch();
+    const {ui} = useSelector(state => state);
+    console.log(ui);
 
     const [formValues, handleInputChange] = useForm({
         email: "admin@gmail.com",
@@ -28,7 +30,7 @@ export const LoginScreen = () => {
             <input type="password" placeholder="********" minLength={6}
                    name="password" className="auth__input" required
                    value={formValues.password} onChange={handleInputChange}/>
-            <button type="submit" className="btn btn-primary btn-block">Login</button>
+            <button type="submit" className="btn btn-primary btn-block" disabled={ui.loading}>Login</button>
 
             <div className="auth__social-networks">
                 <p>Login with social networks</p>

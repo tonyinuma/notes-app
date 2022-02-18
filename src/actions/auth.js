@@ -7,15 +7,19 @@ import {
     signInWithPopup,
     updateProfile
 } from "../firebase/firebaseConfig";
+import {finishLoading, startLoading} from "./ui";
 
 export const startLogin = (email, password) => {
     return async (dispatch) => {
+        dispatch(startLoading())
         await signInWithEmailAndPassword(auth, email, password)
             .then(({user}) => {
+                dispatch(finishLoading())
                 dispatch(login(user.uid, user.displayName));
             })
             .catch(e => {
                 console.log(e);
+                dispatch(finishLoading())
             });
     };
 }
