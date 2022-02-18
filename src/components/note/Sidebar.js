@@ -1,6 +1,16 @@
 import {NoteEntries} from "./NoteEntries";
+import {useDispatch} from "react-redux";
+import {startLogout} from "../../actions/auth";
 
 export const Sidebar = () => {
+
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        console.log("dade");
+        dispatch(startLogout())
+    }
+
     return (
         <aside className="note__sidebar">
             <div className="note_sidebar-navbar">
@@ -9,7 +19,7 @@ export const Sidebar = () => {
                     <span> Tony</span>
                 </h3>
 
-                <button className="btn">Logout</button>
+                <button className="btn" onClick={handleLogout}>Logout</button>
             </div>
             <div className="note__new-entry">
                 <i className="far fa-calendar-plus fa-5x"/>
