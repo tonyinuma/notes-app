@@ -3,15 +3,20 @@ import {
     auth,
     createUserWithEmailAndPassword,
     googleAuthProvider,
+    signInWithEmailAndPassword,
     signInWithPopup,
     updateProfile
 } from "../firebase/firebaseConfig";
 
 export const startLogin = (email, password) => {
-    return (dispatch) => {
-        setTimeout(() => {
-            dispatch(login(123, 'Tony Inuma'))
-        }, 3500);
+    return async (dispatch) => {
+        await signInWithEmailAndPassword(auth, email, password)
+            .then(({user}) => {
+                dispatch(login(user.uid, user.displayName));
+            })
+            .catch(e => {
+                console.log(e);
+            });
     };
 }
 
