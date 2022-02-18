@@ -8,6 +8,7 @@ import {
     updateProfile
 } from "../firebase/firebaseConfig";
 import {finishLoading, startLoading} from "./ui";
+import Swal from 'sweetalert2'
 
 export const startLogin = (email, password) => {
     return async (dispatch) => {
@@ -17,9 +18,14 @@ export const startLogin = (email, password) => {
                 dispatch(finishLoading())
                 dispatch(login(user.uid, user.displayName));
             })
-            .catch(e => {
-                console.log(e);
+            .catch((e) => {
+                console.log(e.message);
                 dispatch(finishLoading())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
             });
     };
 }
@@ -39,7 +45,13 @@ export const startRegister = (email, password, name) => {
 
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.message);
+                dispatch(finishLoading())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
             });
     };
 }
