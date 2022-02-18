@@ -1,10 +1,12 @@
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Switch} from "react-router-dom";
 import {NoteScreen} from "../components/note/NoteScreen";
 import {AuthRouter} from "./AuthRouter";
 import {useEffect, useState} from "react";
 import {auth, onAuthStateChanged} from "../firebase/firebaseConfig";
 import {useDispatch} from "react-redux";
 import {login} from "../actions/auth";
+import {PublicRoute} from "./PublicRoute";
+import {PrivateRoute} from "./PrivateRoute";
 
 export const AppRouter = () => {
 
@@ -31,8 +33,16 @@ export const AppRouter = () => {
     return (
         <Router>
             <Switch>
-                <Route path="/auth" component={AuthRouter}/>
-                <Route exact path="/" component={NoteScreen}/>
+                <PublicRoute
+                    path="/auth"
+                    authenticated={authenticated}
+                    component={AuthRouter}/>
+                <PrivateRoute
+                    exact
+                    authenticated={authenticated}
+                    path="/"
+                    component={NoteScreen}>
+                </PrivateRoute>
                 <Redirect to="/auth/login"/>
             </Switch>
         </Router>
