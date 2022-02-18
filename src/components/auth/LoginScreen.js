@@ -22,11 +22,11 @@ export const LoginScreen = () => {
     return (<>
         <h3 className="auth__title">Login</h3>
         <form onSubmit={handleLogin}>
-            <input type="text" placeholder="Email" name="email"
-                   className="auth__input" autoComplete="off"
+            <input type="email" placeholder="Email" name="email"
+                   className="auth__input" autoComplete="off" required
                    value={formValues.email} onChange={handleInputChange}/>
-            <input type="password" placeholder="********"
-                   name="password" className="auth__input"
+            <input type="password" placeholder="********" minLength={6}
+                   name="password" className="auth__input" required
                    value={formValues.password} onChange={handleInputChange}/>
             <button type="submit" className="btn btn-primary btn-block">Login</button>
 
