@@ -1,9 +1,10 @@
 import {NoteEntries} from "./NoteEntries";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {startLogout} from "../../actions/auth";
 
 export const Sidebar = () => {
 
+    const {name} = useSelector(state => state.auth);
     const dispatch = useDispatch()
 
     const handleLogout = () => {
@@ -15,7 +16,7 @@ export const Sidebar = () => {
             <div className="note_sidebar-navbar">
                 <h3>
                     <i className="far fa-moon"/>
-                    <span> Tony</span>
+                    <span> {name}</span>
                 </h3>
 
                 <button className="btn" onClick={handleLogout}>Logout</button>
