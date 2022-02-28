@@ -12,6 +12,11 @@ export const sheetReducer = (state = initialState, action) => {
                 ...state,
                 active: {...action.payload}
             }
+        case types.sheetLoad:
+            return {
+                ...state,
+                sheets: [...action.payload]
+            }
         default:
             return state;
     }

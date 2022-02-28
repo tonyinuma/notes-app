@@ -30,4 +30,9 @@ export const activeSheet = (id, note) => ({
     }
 })
 
+export const setSheets = (sheets) => ({
+    type: types.sheetLoad,
+    payload: sheets
+})
+
 

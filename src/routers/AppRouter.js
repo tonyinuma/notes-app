@@ -8,6 +8,7 @@ import {login} from "../actions/auth";
 import {PublicRoute} from "./PublicRoute";
 import {PrivateRoute} from "./PrivateRoute";
 import {loadSheets} from "../helpers/loadSheets";
+import {setSheets} from "../actions/sheet";
 
 export const AppRouter = () => {
 
@@ -16,11 +17,12 @@ export const AppRouter = () => {
     const [authenticated, setAuthenticated] = useState(false);
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));
                 setAuthenticated(true);
-                const sheets = loadSheets(user.uid);
+                const sheets = await loadSheets(user.uid);
+                dispatch(setSheets(sheets));
             } else {
                 setAuthenticated(false);
             }
