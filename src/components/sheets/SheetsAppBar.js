@@ -1,7 +1,9 @@
+import dayjs from "dayjs";
+
 export const SheetsAppBar = () => {
     return (
         <div className="sheets__appbar">
-            <span>28 Agosto 1990</span>
+            <span> {dayjs().format("D MMMM YYYY")}</span>
             <div>
                 <button className="btn">Picture</button>
                 <button className="btn">Save</button>
