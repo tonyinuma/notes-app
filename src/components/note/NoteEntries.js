@@ -1,13 +1,14 @@
 import {NoteEntry} from "./NoteEntry";
+import {useSelector} from "react-redux";
 
 export const NoteEntries = () => {
 
-    const entries = [1, 2, 4, 5, 6, 7, 8, 9];
+    const {sheets} = useSelector(state => state.sheet);
 
     return (
         <div className="note__entries">
-            {entries.map(entry => (
-                <NoteEntry key={entry}/>
+            {sheets.map(sheet => (
+                <NoteEntry key={sheet.id} {...sheet}/>
             ))}
         </div>
     );
