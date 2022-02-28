@@ -7,8 +7,7 @@ import {useDispatch} from "react-redux";
 import {login} from "../actions/auth";
 import {PublicRoute} from "./PublicRoute";
 import {PrivateRoute} from "./PrivateRoute";
-import {loadSheets} from "../helpers/loadSheets";
-import {setSheets} from "../actions/sheet";
+import {startLoadingSheets} from "../actions/sheet";
 
 export const AppRouter = () => {
 
@@ -21,8 +20,7 @@ export const AppRouter = () => {
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));
                 setAuthenticated(true);
-                const sheets = await loadSheets(user.uid);
-                dispatch(setSheets(sheets));
+                dispatch(startLoadingSheets(user.uid))
             } else {
                 setAuthenticated(false);
             }
