@@ -1,8 +1,19 @@
 import dayjs from "dayjs";
+import {useDispatch} from "react-redux";
+import {activeSheet} from "../../actions/sheet";
 
-export const NoteEntry = ({title, body, date, imageUrl}) => {
+export const NoteEntry = (sheet) => {
+
+    const {id, title, body, date, imageUrl} = sheet
+
+    const dispatch = useDispatch();
+
+    const handleEntryClick = () => {
+        dispatch(activeSheet(id, sheet))
+    }
+
     return (
-        <div className="note__entry pointer">
+        <div className="note__entry pointer" onClick={handleEntryClick}>
             {imageUrl &&
                 <div className="note__entry-picture"
                      style={{
