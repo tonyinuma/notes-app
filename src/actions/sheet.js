@@ -1,5 +1,5 @@
 import {db} from "../firebase/firebaseConfig";
-import {addDoc, collection} from "firebase/firestore";
+import {addDoc, collection, doc, updateDoc} from "firebase/firestore";
 import {types} from "../types/types";
 import {loadSheets} from "../helpers/loadSheets";
 
@@ -14,9 +14,7 @@ export const startNewSheet = () => {
 
         try {
             const docRef = await addDoc(collection(db, `${uid}/notes/sheets`), sheet);
-
             dispatch(activeSheet(docRef.id, sheet));
-
         } catch (e) {
             console.log(e);
         }
@@ -43,4 +41,14 @@ export const startLoadingSheets = (uid) => {
     }
 }
 
+export const startSaveSheet = (sheet) => {
+    return async (dispatch, getState) => {
+        const {uid} = getState().auth;
 
+        const sheetUpdate = {...sheet};
+        delete sheetUpdate.id;
+
+        const sheetRef = doc(db, `${uid}/notes/sheets/${sheet.id}`);
+        await updateDoc(sheetRef, sheetUpdate);
+    }
+}
