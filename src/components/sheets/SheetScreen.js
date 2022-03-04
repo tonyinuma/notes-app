@@ -1,10 +1,12 @@
 import {SheetsAppBar} from "./SheetsAppBar";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "../../hooks/useForm";
 import {useEffect, useRef} from "react";
+import {activeSheet} from "../../actions/sheet";
 
 export const SheetScreen = () => {
 
+    const dispatch = useDispatch();
     const {active: sheet} = useSelector(state => state.sheet);
     const [formValues, handleInputChange, reset] = useForm(sheet);
     const activeId = useRef(sheet.id)
@@ -16,6 +18,9 @@ export const SheetScreen = () => {
         }
     }, [sheet, reset]);
 
+    useEffect(() => {
+        dispatch(activeSheet(formValues.id, {...formValues}));
+    }, [formValues]);
 
     return (
         <div className="sheets__main-content">

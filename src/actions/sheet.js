@@ -23,11 +23,11 @@ export const startNewSheet = () => {
     }
 }
 
-export const activeSheet = (id, note) => ({
+export const activeSheet = (id, sheet) => ({
     type: types.sheetActive,
     payload: {
         id,
-        ...note
+        ...sheet
     }
 })
 
