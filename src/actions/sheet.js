@@ -2,6 +2,7 @@ import {db} from "../firebase/firebaseConfig";
 import {addDoc, collection, doc, updateDoc} from "firebase/firestore";
 import {types} from "../types/types";
 import {loadSheets} from "../helpers/loadSheets";
+import Swal from "sweetalert2";
 
 export const startNewSheet = () => {
     return async (dispatch, getState) => {
@@ -52,6 +53,13 @@ export const startSaveSheet = (sheet) => {
         await updateDoc(sheetRef, sheetUpdate);
 
         dispatch(refreshSheet(sheet.id, sheetUpdate));
+
+        Swal.fire({
+            title: 'Saved',
+            text: 'Sheet has been saved successfully',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        })
     }
 }
 
