@@ -50,5 +50,18 @@ export const startSaveSheet = (sheet) => {
 
         const sheetRef = doc(db, `${uid}/notes/sheets/${sheet.id}`);
         await updateDoc(sheetRef, sheetUpdate);
+
+        dispatch(refreshSheet(sheet.id, sheetUpdate));
     }
 }
+
+export const refreshSheet = (id, sheet) => ({
+    type: types.sheetUpdate,
+    payload: {
+        id,
+        sheet: {
+            id,
+            ...sheet
+        }
+    }
+});
